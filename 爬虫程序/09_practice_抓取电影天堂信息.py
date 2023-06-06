@@ -17,3 +17,5 @@ result1 = obj1.search(resp.text)
 html = result1.group("html").strip()
 print(html)
 
+obj2 = re.compile(r"",re.S)
+
