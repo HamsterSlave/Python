@@ -21,8 +21,10 @@ from PyQt5.QtGui import QPixmap, QColor
 from PyQt5.QtCore import QSize
 import sys
 
-
+# 1797个8*8的数据集
 mnist = load_digits()
+# random_state设置相同随机种子的值，可复现相同结果
+# 将数据集划分1347个训练集和450个测试集
 x, x_test, y, y_test = train_test_split(
     mnist.data, mnist.target, test_size=0.25, random_state=40)
 
@@ -129,7 +131,9 @@ def compare(acc):
     ax.set_title('不同分类方法准确率的比较', fontsize=12)
     plt.show()
 
+# 实例化一个MinMaxScaler对象
 mm = preprocessing.MinMaxScaler()
+# 对训练集和测试集进行归一化（0,1）之间
 train_x = mm.fit_transform(x)
 test_x = mm.transform(x_test)
 
@@ -144,6 +148,7 @@ plot_embedding(x_test, z, title="MultinomialNB")
 plot_embedding_3d(x_test, z, title="MultinomialNB")
 #plot_prediction(x_test, y_test, z, "MultinomialNB", 10, 16)
 '''
+# 逻辑回归分类
 model = LogisticRegression(random_state=0, max_iter=3000)
 model.fit(x, y)
 z = model.predict(x_test)
@@ -154,9 +159,11 @@ plot_embedding(x_test, z, title="SoftMax")
 plot_embedding_3d(x_test, z, title="SoftMax")
 #plot_prediction(x_test, y_test, z, "SoftMax", 10, 16)
 '''
+# 标准化，均值为0，方差为1
 ss = preprocessing.StandardScaler()
 train_x = ss.fit_transform(x)
 test_x = ss.transform(x_test)
+
 
 model = KNeighborsClassifier(
     n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30)
@@ -379,7 +386,9 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 
 
 if __name__ == "__main__":
+    # 实例化一个QApplication对象
     app = QApplication(sys.argv)
+    # 创建一个MainWindow对象,用于GUI界面和交互逻辑
     Gui = MainWindow()
     Gui.show()
 
