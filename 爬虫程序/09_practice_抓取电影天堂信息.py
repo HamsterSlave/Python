@@ -15,7 +15,26 @@ resp.encoding = "gbk"
 obj1 = re.compile(r"2023必看热片.*?<ul>(?P<html>.*?)</ul>",re.S)
 result1 = obj1.search(resp.text)
 html = result1.group("html").strip()
-print(html)
+# print(html)
 
-obj2 = re.compile(r"",re.S)
+obj2 = re.compile(r"<li><a href='(?P<url1>.*?)'" ,re.S)
+result2 = obj2.finditer(html)
+obj3 = re.compile(r'<div id="Zoom">.*?◎片　　名　(?P<name>.*?)<br />.*?'
+                  r'<td style="WORD-WRAP: break-word" bgcolor="#fdfddf"><a href="(?P<address>.*?)">', re.S)
+for item in result2:
+    url1 = item.group("url1")
+    url2 = url.strip("/") + url1
+    # print(url2)
+    resp1 = requests.get(url2)
+    resp1.encoding = "gbk"
+    # print(resp1.text)
+    result3 = obj3.finditer(resp1.text)
+    for i in result3:
+        name = i.group("name")
+        address = i.group("address")
+        print(name + "\n" + address + "\n")
+
+
+
+
 
