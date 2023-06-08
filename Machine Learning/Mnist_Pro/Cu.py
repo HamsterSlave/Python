@@ -164,7 +164,7 @@ ss = preprocessing.StandardScaler()
 train_x = ss.fit_transform(x)
 test_x = ss.transform(x_test)
 
-
+#  K-近邻分类器，指定邻居的数量为5个，指定所有邻居的权重相同，自动选择最优的算法，指定叶子节点的大小为30
 model = KNeighborsClassifier(
     n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30)
 model.fit(train_x, y)
@@ -176,6 +176,7 @@ plot_embedding(x_test, z, title="KNN")
 plot_embedding_3d(x_test, z, title="KNN")
 #plot_prediction(x_test, y_test, z, "KNN", 10, 16)
 '''
+# 多层感知器分类器，100个神经元的隐藏层，激活函数为logistic，优化器为adam，学习率为0.0001，最大迭代次数为2000
 model = MLPClassifier(hidden_layer_sizes=(100,),
                       activation='logistic', solver='adam',
                       learning_rate_init=0.0001, max_iter=2000)
@@ -188,6 +189,7 @@ plot_embedding(x_test, z, title="MLP")
 plot_embedding_3d(x_test, z, title="MLP")
 #plot_prediction(x_test, y_test, z, "MLP", 10, 16)
 '''
+# 支持向量机，设置参数probability=True以便获取预测概率
 model = SVC(probability=True)
 model.fit(x, y)
 z = model.predict(x_test)
@@ -198,6 +200,7 @@ plot_embedding(x_test, z, title="SVM")
 plot_embedding_3d(x_test, z, title="SVM")
 #plot_prediction(x_test, y_test, z, "SVM", 10, 16)
 '''
+# 决策树分类器
 model = DecisionTreeClassifier()
 model.fit(x, y)
 z = model.predict(x_test)
