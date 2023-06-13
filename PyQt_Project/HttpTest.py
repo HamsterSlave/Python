@@ -11,9 +11,10 @@ class HttpTest(QObject):
         QObject.__init__(self)
         # 从 UI 定义中动态 创建一个相应的窗口对象
         self.ui = uic.loadUi(r"../UI/Httptest.ui")
-        # 给 boxMethod 添加选项 GET POST PUT DELETE
+        # 给 comboBox 添加选项 GET POST PUT DELETE
         self.ui.comboBox.addItems(
             ['GET', 'POST', 'PUT', 'DELETE'])
+        # 给 comboBox_2 添加选项 GET POST PUT DELETE
         # 让 表格控件宽度随着父窗口的缩放自动缩放
         self.ui.tableWidget_2.horizontalHeader().setStretchLastSection(True)
         # 设定第1列的宽度为 180像素
@@ -24,6 +25,8 @@ class HttpTest(QObject):
         self.ui.pushButton_3.clicked.connect(self.addOneHeader)
         # 信号处理：删除消息头
         self.ui.pushButton_2.clicked.connect(self.delOneHeader)
+        # 信号处理：清除
+        self.ui.pushButton_4.clicked.connect(self.delAll)
 
     def sendRequest(self):
         method = self.ui.comboBox.currentText()
@@ -45,6 +48,7 @@ class HttpTest(QObject):
                                headers=headers,
                                data=payload
                                )
+
 
         prepared = req.prepare()
 
@@ -70,6 +74,9 @@ class HttpTest(QObject):
         self.ui.tableWidget_2.removeRow(
             self.ui.tableWidget_2.currentRow()
         )
+
+    def delAll(self):
+        self.ui.textEdit.clear()
 
     def pretty_print_request(self,req):
 
@@ -98,7 +105,7 @@ class HttpTest(QObject):
 
 app = QApplication([])
 # 加载 icon
-app.setWindowIcon(QIcon('logo.png'))
+app.setWindowIcon(QIcon(r'../res/火箭.png'))
 httpClient = HttpTest()
 httpClient.ui.show()
 app.exec_()
