@@ -17,7 +17,7 @@ from layout import Ui_MainWindow
 from paintboard import PaintBoard
 from PyQt5.QtWidgets import QMainWindow, QDesktopWidget, QApplication
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtGui import QPixmap, QColor
+from PyQt5.QtGui import QPixmap, QColor, QIcon
 from PyQt5.QtCore import QSize
 import sys
 
@@ -391,6 +391,7 @@ class MainWindow(QMainWindow,Ui_MainWindow):
 if __name__ == "__main__":
     # 实例化一个QApplication对象
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon(r'../../res/火箭.png'))
     # 创建一个MainWindow对象,用于GUI界面和交互逻辑
     Gui = MainWindow()
     Gui.show()
