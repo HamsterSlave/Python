@@ -143,22 +143,22 @@ model.fit(train_x, y)
 z = model.predict(test_x)
 sample.append(model)
 acc.append(accuracy_score(z, y_test))
-'''
+
 plot_embedding(x_test, z, title="MultinomialNB")
 plot_embedding_3d(x_test, z, title="MultinomialNB")
-#plot_prediction(x_test, y_test, z, "MultinomialNB", 10, 16)
-'''
+plot_prediction(x_test, y_test, z, "MultinomialNB", 10, 16)
+
 # 逻辑回归分类
 model = LogisticRegression(random_state=0, max_iter=3000)
 model.fit(x, y)
 z = model.predict(x_test)
 sample.append(model)
 acc.append(accuracy_score(z, y_test))
-'''
+
 plot_embedding(x_test, z, title="SoftMax")
 plot_embedding_3d(x_test, z, title="SoftMax")
-#plot_prediction(x_test, y_test, z, "SoftMax", 10, 16)
-'''
+plot_prediction(x_test, y_test, z, "SoftMax", 10, 16)
+
 # 标准化，均值为0，方差为1
 ss = preprocessing.StandardScaler()
 train_x = ss.fit_transform(x)
@@ -171,11 +171,11 @@ model.fit(train_x, y)
 z = model.predict(test_x)
 sample.append(model)
 acc.append(accuracy_score(z, y_test))
-'''
+
 plot_embedding(x_test, z, title="KNN")
 plot_embedding_3d(x_test, z, title="KNN")
-#plot_prediction(x_test, y_test, z, "KNN", 10, 16)
-'''
+plot_prediction(x_test, y_test, z, "KNN", 10, 16)
+
 # 多层感知器分类器，100个神经元的隐藏层，激活函数为logistic，优化器为adam，学习率为0.0001，最大迭代次数为2000
 model = MLPClassifier(hidden_layer_sizes=(100,),
                       activation='logistic', solver='adam',
@@ -184,34 +184,34 @@ model.fit(x, y)
 z = model.predict(x_test)
 sample.append(model)
 acc.append(accuracy_score(z, y_test))
-'''
+
 plot_embedding(x_test, z, title="MLP")
 plot_embedding_3d(x_test, z, title="MLP")
-#plot_prediction(x_test, y_test, z, "MLP", 10, 16)
-'''
+plot_prediction(x_test, y_test, z, "MLP", 10, 16)
+
 # 支持向量机，设置参数probability=True以便获取预测概率
 model = SVC(probability=True)
 model.fit(x, y)
 z = model.predict(x_test)
 sample.append(model)
 acc.append(accuracy_score(z, y_test))
-'''
+
 plot_embedding(x_test, z, title="SVM")
 plot_embedding_3d(x_test, z, title="SVM")
-#plot_prediction(x_test, y_test, z, "SVM", 10, 16)
-'''
+plot_prediction(x_test, y_test, z, "SVM", 10, 16)
+
 # 决策树分类器
 model = DecisionTreeClassifier()
 model.fit(x, y)
 z = model.predict(x_test)
 sample.append(model)
 acc.append(accuracy_score(z, y_test))
-'''
+
 plot_embedding(x_test, z, title="DecisionTree")
 plot_embedding_3d(x_test, z, title="DecisionTree")
-#plot_prediction(x_test, y_test, z, "DecisionTree", 10, 16)
-'''
-#compare(acc)
+plot_prediction(x_test, y_test, z, "DecisionTree", 10, 16)
+
+compare(acc)
 
 
 ## GUI类
